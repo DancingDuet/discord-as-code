@@ -31,6 +31,12 @@ resource "discord_guild_channel" "announce" {
   position = 1
 }
 
+resource "discord_guild_channel" "commits" {
+  guild_id = "${discord_guild.dsac.id}"
+  name = "commits"
+  parent_id = "${discord_guild_channel.announcements.id}"
+  position = 2
+}
 
 resource "discord_guild_channel" "general_category" {
   guild_id = "${discord_guild.dsac.id}"
@@ -60,4 +66,19 @@ resource "discord_guild_channel" "memes" {
   parent_id = "${discord_guild_channel.general_category.id}"
   position = 3
   topic = "All EPIC memes go here!"
+}
+
+resource "discord_guild_channel" "feedback" {
+  guild_id = "${discord_guild.dsac.id}"
+  name = "feedback"
+  parent_id = "${discord_guild_channel.general_category.id}"
+  position = 4
+  topic = "Feedback"
+}
+
+resource "discord_guild_channel" "chitchat_category" {
+  guild_id = "${discord_guild.dsac.id}"
+  name = "Chatting"
+  type = 4 // Category
+  position = 2
 }
